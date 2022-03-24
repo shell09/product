@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상품 수정</title>
+</head>
+<body>
+  <div class="wrap">
+    <div class="content">
+      <h3>상품 수정</h3>
+      <hr>
+      <div>
+        <form id="updateForm" action="" th:action th:method="post" th:object="${updateForm}">
+          <input type="hidden" th:field="*{productId}">
+        <ul>
+          <li>
+            <span>상품명</span>
+            <input type="text" th:field="*{productName}">
+          </li>
+          <li>
+            <span>가격</span>
+            <input type="text" th:field="*{productPrice}">
+          </li>
+          <li>
+            <span>수량</span>
+            <input type="text" th:field="*{productFig}">
+          </li>
+          <li>
+            <button type="button" id="updateBtn">수정</button>
+            <button type="button" id="listBtn">목록</button>
+          </li>
+        </ul>
+      </form>
+      </div>
+    </div>
+  </div>        
+  <script>
+    const $updateBtn = document.getElementById('updateBtn');
+    $updateBtn.addEventListener('click', evt=>{
+      const frm = document.getElementById('updateForm')
+      const productId = frm.productId.value;
+      const url = `/product/${productId}/edit`;
+
+      frm.action = url;
+      frm.submit();
+    });
+
+    const $listBtn = document.getElementById('listBtn');
+     $listBtn.addEventListener('click', evt=>{
+      location.href = '/product/all';
+     });
+
+  </script>
+</body>
+</html>
